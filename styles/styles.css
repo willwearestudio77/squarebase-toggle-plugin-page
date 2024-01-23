@@ -1,0 +1,55 @@
+main{
+    max-width:1200px;
+    background-color:grey;
+    margin:auto;
+    padding:20px;
+}
+h2,p,div{
+    color:white;
+    font-family: 'Roboto', sans-serif;
+}
+body{
+    background-color:black;
+    margin:0;
+}
+header{
+    background-color:white;
+    text-align:center;
+}
+header h1{
+    color:black;
+    font-family: 'Roboto', sans-serif;
+    font-weight:bold;
+    font-size:40px;
+    margin:0px;
+    padding:20px;
+}
+.code-block{
+    background-color:black;
+    color:yellowgreen;
+    padding:20px;
+    border-radius:10px;
+    margin-top:20px;
+}
+#copyButton{
+    background-color:yellowgreen;
+    color:black;
+    border-radius:10px;
+    padding:10px;
+    border:none;
+    font-family: 'Roboto', sans-serif;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:20px;
+}
+section{
+    margin:20px;
+}
+.settings-block{
+    background-color:black;
+    color:yellowgreen;
+    padding:20px;
+    border-radius:10px;
+    margin-top:20px;
+}
+    

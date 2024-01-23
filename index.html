@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>Squarebase Toggle Generator</h1>
+    </header>
+    <main>
+        <div class="section section-1">
+            <h2>Copy and add this code to your site header</h2>
+            <div class="code-block">
+                &lt;script src="https://cdn.jsdelivr.net/gh/willwearestudio77/sqbase-plugins.js"&gt;&lt;/script&gt;
+            </div>
+        </div>
+        <div class="section section-2">
+            <h2>Copy the below code in to a code block in the section above the section you want to toggle</h2>
+
+            <div class="code-block">
+                &lt;div class="slide-down-button"&gt;
+                &lt;button class="drop-down-button" onclick="toggleSection(this)"&gt;
+                &lt;h2&gt;Toggle Button&lt;/h2&gt;
+                &lt;div class="arrow-container"&gt;
+                &lt;svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"&gt;
+                &lt;path d="M1 1L5 5L9 1" stroke="#0B2F50" /&gt;
+                &lt;/svg&gt;
+                &lt;/div&gt;
+                &lt;/button&gt;
+                &lt;/div&gt;
+            </div>
+        </div>
+        <div class="section section-3">
+            <h2>Adjust the below settings to change your toggles css then copy it and paste in to your additional css
+                panel</h2>
+            <div class="settings-block">
+                <label for="borderColor">Border Color: </label>
+                <input type="color" id="borderColor" value="#ff0000">
+
+                <br>
+
+                <label for="borderWidth">Border Width: </label>
+                <input type="range" id="borderWidth" min="0" max="10" value="2">
+                <span id="borderWidthValue">2</span>px
+
+                <br>
+
+                <label for="strokeColor">Arrow Color: </label>
+                <input type="color" id="strokeColor" value="#ff0000">
+
+                <br><label for="backgroundColor">Background Color: </label>
+                <input type="color" id="backgroundColor" value="#ff0000"><br>
+            </div>
+            <div class="code-block" id="generatedCodeBlock"></div>
+            <button id="copyButton">Copy</button>
+
+            <script>
+                function updateCodeBlock() {
+                    const borderColor = document.getElementById('borderColor').value;
+                    const borderWidth = document.getElementById('borderWidth').value;
+                    const strokeColor = document.getElementById('strokeColor').value;
+                    const backgroundColor = document.getElementById('backgroundColor').value;
+                    const generatedCodeBlock = `
+      .toggle-section{
+    .row.sqs-row{
+      margin:0;
+    }
+    .content-wrapper{
+      padding:0px !important;
+      
+      .code-block{
+        padding:0px;
+        
+      }
+    }
+  }
+  .close{
+    min-height:0px !important;
+    transition:max-height 0.5s ease-in-out;
+   height:0px !important;
+    opacity:0;
+              overflow: hidden;
+           max-height:0px !important;   
+  }
+  .open{
+    transition:max-height 0.5s ease-in-out;
+    @media @desktop{
+      max-height:10000px;}
+    @media @mobile{
+      max-height:50000px;}
+    
+    opacity:1; 
+    overflow: hidden;
+  
+  }
+        .drop-down-button {
+        width:100%;
+        border:0px;
+        background-color:${backgroundColor};
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:30px;
+          border-bottom: ${borderWidth}px solid ${borderColor};
+          h2 {
+            color: ${borderColor};
+          }
+          path {
+            stroke: ${strokeColor};
+          }
+        }
+      `;
+
+                    document.getElementById('generatedCodeBlock').innerText = generatedCodeBlock;
+                }
+
+                document.getElementById('borderColor').addEventListener('input', updateCodeBlock);
+                document.getElementById('borderWidth').addEventListener('input', () => {
+                    document.getElementById('borderWidthValue').innerText = document.getElementById('borderWidth').value;
+                    updateCodeBlock();
+                });
+                document.getElementById('strokeColor').addEventListener('input', updateCodeBlock);
+                document.getElementById('backgroundColor').addEventListener('input', updateCodeBlock);
+
+                // Copy to clipboard functionality
+                document.getElementById('copyButton').addEventListener('click', () => {
+                    const codeBlock = document.getElementById('generatedCodeBlock');
+                    const textArea = document.createElement('textarea');
+                    textArea.value = codeBlock.innerText;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    alert('Code copied to clipboard!');
+                });
+
+                updateCodeBlock();
+            </script>
+        </div>
+    </main>
+</body>
+
+</html>
